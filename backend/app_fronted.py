@@ -4,7 +4,7 @@ import httpx
 # Configure the page style to feel like a mobile-first app dashboard
 st.set_page_config(page_title="Matatu SaaS Operator", page_icon="🚌", layout="centered")
 
-BASE_URL = "https://matatu-operator-dashboard.onrender.com"
+BASE_URL = "https://matatu-sacco-saas.onrender.com"
 
 st.title("🚌 Matatu SACCO SaaS MVP")
 st.write("Simplified Management Interface for Field Operations")
