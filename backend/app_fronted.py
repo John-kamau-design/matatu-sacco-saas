@@ -20,7 +20,7 @@ if choice == "Onboard SACCO":
     if st.button("Submit Registration"):
         if sacco_name:
             with httpx.Client() as client:
-                response = client.post(f"{BASE_URL}/saccos", json={"sacco_name": sacco_name})
+                response = client.post(f"{BASE_URL}/saccos/", json={"sacco_name": sacco_name})
             if response.status_code == 201:
                 data = response.json()
                 st.success(f"🎉 Success! Registered {data['sacco_name']}")
