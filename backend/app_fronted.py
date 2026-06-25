@@ -26,7 +26,11 @@ if choice == "Onboard SACCO":
                 st.success(f"🎉 Success! Registered {data['sacco_name']}")
                 st.info(f"Copy this Unique SACCO ID:  `{data['sacco_id']}`")
             else:
-                st.error(f"Error: {response.json().get('detail')}")
+                try:
+                    error_detail = response.json().get('detail', response.text)
+                except Exception:
+                    error_detail = f"Status Code {response.status_code}: {response.text}"
+                st.error(f"Error: {error_detail}")
 
 # --- TAB 2: REGISTER OWNER ---
 elif choice == "Register Owner":
