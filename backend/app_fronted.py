@@ -19,7 +19,7 @@ if choice == "Onboard SACCO":
     sacco_name = st.text_input("Enter SACCO Name (e.g., Ganji Sacco)")
     if st.button("Submit Registration"):
         if sacco_name:
-            with httpx.Client() as client:
+            with httpx.Client(follow_redirects=True) as client:
                 response = client.post(f"{BASE_URL}/saccos/", json={"sacco_name": sacco_name})
             if response.status_code == 201:
                 data = response.json()
@@ -42,7 +42,7 @@ elif choice == "Register Owner":
     if st.button("Register Owner"):
         if sacco_id and owner_name and phone:
             payload = {"sacco_id": sacco_id, "owner_name": owner_name, "phone_number": phone}
-            with httpx.Client() as client:
+            with httpx.Client(follow_redirects=True) as client:
                 response = client.post(f"{BASE_URL}/owners", json=payload)
             if response.status_code == 201:
                 data = response.json()
@@ -70,7 +70,7 @@ elif choice == "Daily Ledger Entry":
             "mpesa_collected": mpesa,
             "total_expenses": expenses
         }
-        with httpx.Client() as client:
+        with httpx.Client(follow_redirects=True) as client:
             response = client.post(f"{BASE_URL}/ledgers", json=payload)
         if response.status_code == 201:
             st.success("🚀 Operational record saved! 500 KES automatic 'Debe' deducted.")
@@ -83,7 +83,7 @@ elif choice == "Financial Summaries":
     sacco_id = st.text_input("Paste SACCO ID to view records")
     
     if st.button("Fetch Live Reports"):
-        with httpx.Client() as client:
+        with httpx.Client(follow_redirects=True) as client:
             response = client.get(f"{BASE_URL}/saccos/{sacco_id}/summary")
         if response.status_code == 200:
             data = response.json()
